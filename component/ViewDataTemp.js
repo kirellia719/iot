@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const ViewDataTemp = ({ label, feedName, connector }) => {
+const ViewDataTemp = ({ label, feedName, color, connector }) => {
     const [hasInit, setHasInit] = useState(false);
     const [value, setValue] = useState(0);
 
@@ -28,7 +28,7 @@ const ViewDataTemp = ({ label, feedName, connector }) => {
     }, []);
 
     return (<>
-        {hasInit ? (<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', backgroundColor: '#fbe3e3' }}>
+        {hasInit ? (<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', backgroundColor: color }}>
             <View style={{ flexDirection: 'row', height: '100%', justifyContent: 'space-between', alignItems: 'center', padding: 20 }}>
                 <Icon name='thermometer-outline' size={50} color={'red'} />
                 <View style={{ width: 100, alignItems: 'center' }}>

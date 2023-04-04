@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const ViewDataTemp = ({ label, feedName, color, connector }) => {
+const ViewHuman = ({ label, feedName, color, connector }) => {
     const [hasInit, setHasInit] = useState(false);
     const [value, setValue] = useState(0);
 
@@ -30,13 +30,14 @@ const ViewDataTemp = ({ label, feedName, color, connector }) => {
     return (<>
         {hasInit ? (<View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', backgroundColor: color }}>
             <View style={{ flexDirection: 'row', height: '100%', justifyContent: 'space-between', alignItems: 'center', padding: 20 }}>
-                <Icon name='water-outline' size={50} color={'dodgerblue'} />
+                <Icon name='person-outline' size={50} color={'green'} />
                 <View style={{ width: 100, alignItems: 'center' }}><Text style={{ fontWeight: 500 }}>{label}</Text></View >
             </View>
-            <View><Text style={{ fontSize: 25, padding: 20 }}>{value} <Text style={{ fontWeight: 300, fontSize: 20 }}>%</Text></Text></View>
-        </View>) : <ActivityIndicator />}
+            <View><Text style={{ fontSize: 15, padding: 20 }}>{value == '1' ? 'Có người' : 'Không có người'}</Text></View>
+        </View >) : <ActivityIndicator />
+        }
     </>);
 };
 
 const MapStateToProps = (state) => ({ connector: state.connector });
-export default connect(MapStateToProps)(ViewDataTemp);
+export default connect(MapStateToProps)(ViewHuman);
