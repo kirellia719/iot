@@ -2,7 +2,7 @@ const mqtt = require("mqtt/dist/mqtt");
 
 const MqttInfo = {
     username: 'kirellia719',
-    key: 'aio_OJXa766WvluAtpVqkjQBb3cLyMk6'
+    key: 'aio_icSh926eIcUzhvwQflwDBDCSgACD'
 }
 
 class MQTTClientWeb {

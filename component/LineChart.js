@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend,);
 
-const HistoryChart = ({ connector, color, feedName, label = '', duration = 10000, limit = 12 }) => {
+const LineChart = ({ connector, color, feedName, label = '', duration = 10000, limit = 12 }) => {
     const [timeNow, setTimeNow] = useState(new Date());
     const [data, setData] = useState([]);
 
@@ -100,4 +100,4 @@ const HistoryChart = ({ connector, color, feedName, label = '', duration = 10000
 }
 
 const MapStateToProps = (state) => ({ connector: state.connector });
-export default connect(MapStateToProps)(HistoryChart);
+export default connect(MapStateToProps)(LineChart);

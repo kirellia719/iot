@@ -1,13 +1,10 @@
-import { ScrollView, View } from 'react-native';
-import HistoryChart from '../component/HistoryChart';
+import { View } from 'react-native';
+import HistorySpan from '../component/HistorySpan';
 
 const History = () => {
     return (
-        <View style={{ flex: 1, alignItems: 'center', width: '100%' }}>
-            <ScrollView style={{ flex: 1, width: '100%' }}>
-                <HistoryChart feedName={'cambien1'} label='Nhiệt độ' duration={10000} color={'Crimson'} />
-                <HistoryChart feedName={'cambien2'} label='Độ ẩm' duration={10000} color={'DodgerBlue'} />
-            </ScrollView>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+            <HistorySpan feeds={['cambien1', 'cambien2', 'nutnhan1', 'ai']} />
         </View>
     );
 }
