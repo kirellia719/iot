@@ -33,7 +33,7 @@ const ViewHuman = ({ label, feedName, color, connector }) => {
                 <Icon name='person-outline' size={50} color={'green'} />
                 <View style={{ width: 100, alignItems: 'center' }}><Text style={{ fontWeight: 500 }}>{label}</Text></View >
             </View>
-            <View><Text style={{ fontSize: 15, padding: 20 }}>{value == '1' ? 'Có người' : 'Không có người'}</Text></View>
+            <View><Text style={{ fontSize: 15, padding: 20 }}>{value == '1' ? <b>Có người</b> : 'Không có người'}</Text></View>
         </View >) : <ActivityIndicator />
         }
     </>);

@@ -1,7 +1,9 @@
 import MQTTClientWeb from "../mqtt/MQTTClientWeb";
+import Recognition from "../mqtt/Recognition";
 
 const initState = {
-    connector: MQTTClientWeb
+    connector: MQTTClientWeb,
+    recognition: Recognition
 }
 
 const Reducer = (state = initState, action) => {

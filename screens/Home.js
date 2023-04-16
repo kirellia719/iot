@@ -3,6 +3,7 @@ import mqttClient from '../mqtt/MQTTClientWeb';
 import ButtonAction from '../component/ButtonAction';
 import ViewDataTemp from '../component/ViewDataTemp';
 import ViewDataHumid from '../component/ViewDataHumid';
+import RecognitionButton from '../component/RecognitionButton';
 import { Divider } from 'react-native-elements';
 import ViewHuman from '../component/ViewHuman';
 
@@ -35,7 +36,10 @@ const Home = () => {
                 <View style={[center, { flex: 1 }]}>
                     <ButtonAction label={'Máy bơm'} feedName={'nutnhan1'} connector={mqttClient} maxError={2} delay={3000} />
                 </View>
-
+                <Divider />
+                <View style={[center, { flex: 1 }]}>
+                    <RecognitionButton />
+                </View>
             </View>
         </View>
     );

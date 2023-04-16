@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './screens/Home';
 import Statistic from './screens/Statistic';
 import History from './screens/History';
+
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import Reducer from './screens/reducer';

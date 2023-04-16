@@ -1,9 +1,6 @@
 const mqtt = require("mqtt/dist/mqtt");
 
-const MqttInfo = {
-    username: 'kirellia719',
-    key: 'aio_icSh926eIcUzhvwQflwDBDCSgACD'
-}
+const MqttInfo = require('./MQTTInfo')
 
 class MQTTClientWeb {
     constructor() {

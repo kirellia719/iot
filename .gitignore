@@ -1,5 +1,6 @@
 node_modules/
 .expo/
+mqtt/MQTTInfo.js
 dist/
 npm-debug.*
 *.jks

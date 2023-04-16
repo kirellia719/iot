@@ -5,55 +5,73 @@ import { connect } from 'react-redux';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend,);
 
-const LineChart = ({ connector, color, feedName, label = '', duration = 10000, limit = 12 }) => {
+const LineChart = ({ connector, color, feedName, label = '', duration = 10000, limit = 3 }) => {
     const [timeNow, setTimeNow] = useState(new Date());
     const [data, setData] = useState([]);
 
-    const initChart = () => {
-        fetch(`https://io.adafruit.com/api/v2/${connector.username}/feeds/${feedName}/data?limit=${limit}&X-AIO-Key=${connector.key}`)
-            .then(res => res.json())
-            .then(res => {
-                setData(() => {
-                    const newData = [];
-                    for (let i = limit; i > 0; i--) {
-                        let t = new Date(res[i - 1].created_at);
-                        newData.push({
-                            x: t.getMinutes() + ':' + (t.getSeconds() < 10 ? '0' : '') + t.getSeconds(),
-                            y: res[i - 1].value
-                        });
-                    }
-                    return newData;
-                });
-            });
-    }
+    // const initChart = () => {
+    //     fetch(`https://io.adafruit.com/api/v2/${connector.username}/feeds/${feedName}/data?limit=${limit}&X-AIO-Key=${connector.key}`)
+    //         .then(res => res.json())
+    //         .then(res => {
+    //             setData(() => {
+    //                 const newData = [];
+    //                 for (let i = limit; i > 0; i--) {
+    //                     let t = new Date(res[i - 1].created_at);
+    //                     newData.push({
+    //                         x: t.getMinutes() + ':' + (t.getSeconds() < 10 ? '0' : '') + t.getSeconds(),
+    //                         y: res[i - 1].value
+    //                     });
+    //                 }
+    //                 return newData;
+    //             });
+    //         });
+    // }
+
+    // useEffect(() => {
+    //     if ((timeNow.getSeconds() * 1000) % duration == 0) {
+    //         fetch(`https://io.adafruit.com/api/v2/${connector.username}/feeds/${feedName}/data?limit=${limit}&X-AIO-Key=${connector.key}`)
+    //             .then(res => res.json())
+    //             .then(res => {
+    //                 setData(() => {
+    //                     const newData = [];
+    //                     for (let i = limit; i > 0; i--) {
+    //                         let t = new Date(res[i - 1].created_at);
+    //                         newData.push({
+    //                             x: t.getMinutes() + ':' + (t.getSeconds() < 10 ? '0' : '') + t.getSeconds(),
+    //                             y: res[i - 1].value
+    //                         });
+    //                     }
+    //                     return newData;
+    //                 });
+    //             });
+    //     }
+    // }, [timeNow])
+
+    // useState(() => {
+    //     initChart();
+    //     setInterval(() => {
+    //         setTimeNow(new Date());
+    //     }, 1000);
+    // }, [])
 
     useEffect(() => {
-        if ((timeNow.getSeconds() * 1000) % duration == 0) {
-            fetch(`https://io.adafruit.com/api/v2/${connector.username}/feeds/${feedName}/data?limit=${limit}&X-AIO-Key=${connector.key}`)
-                .then(res => res.json())
-                .then(res => {
-                    setData(() => {
-                        const newData = [];
-                        for (let i = limit; i > 0; i--) {
-                            let t = new Date(res[i - 1].created_at);
-                            newData.push({
-                                x: t.getMinutes() + ':' + (t.getSeconds() < 10 ? '0' : '') + t.getSeconds(),
-                                y: res[i - 1].value
-                            });
-                        }
-                        return newData;
+        connector.subscribe(feedName);
+        connector.on('message', (topic, message) => {
+            let feed = topic.split('/')[2];
+            if (feed == feedName) {
+                setData((data) => {
+                    const newData = [...data];
+                    let t = new Date();
+                    newData.push({
+                        x: t.getMinutes() + ':' + (t.getSeconds() < 10 ? '0' : '') + t.getSeconds(),
+                        y: parseInt(message.toString())
                     });
+                    if (newData.length > limit) newData.splice(0, 1);
+                    return newData;
                 });
-        }
-    }, [timeNow])
-
-    useState(() => {
-        initChart();
-        setInterval(() => {
-            setTimeNow(new Date());
-        }, 1000);
+            }
+        });
     }, [])
-
     const chartOtions = {
         responsive: true,
         plugins: {

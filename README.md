@@ -4,8 +4,13 @@ At first, you must run command to download package:
 
 ### `npm install`
 
-In the project directory, you can run:
+Precondition: `NodeJS`
+Note: change to project directory.
 
+Firstly, download all package for project:
+### `npm install`
+
+To run project:
 ### `expo start`
 
 Then:
